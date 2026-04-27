@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from django.shortcuts import render, redirect,get_object_or_404
 from django.views.generic import ListView
 from django.contrib.auth.decorators import login_required
@@ -7,6 +8,11 @@ from django.http import HttpResponseNotAllowed
 from django.contrib import messages
 
 
+=======
+from django.shortcuts import render, redirect
+from django.views.generic import ListView
+from django.contrib.auth.decorators import login_required
+>>>>>>> 1074f0aa0d82a4919a3df8e7085d78470368cdc7
 
 from users.models import User
 from .models import (
@@ -30,6 +36,7 @@ from .forms import (
 
 
 # Supplier views
+<<<<<<< HEAD
 
 @login_required(login_url='login')
 def create_supplier(request):
@@ -76,10 +83,37 @@ def create_supplier(request):
         form = SupplierForm()
     
     return render(request, 'store/create_supplier.html', {'form': form})
+=======
+@login_required(login_url='login')
+def create_supplier(request):
+    forms = SupplierForm()
+    if request.method == 'POST':
+        forms = SupplierForm(request.POST)
+        if forms.is_valid():
+            name = forms.cleaned_data['name']
+            address = forms.cleaned_data['address']
+            email = forms.cleaned_data['email']
+            username = forms.cleaned_data['username']
+            password = forms.cleaned_data['password']
+            retype_password = forms.cleaned_data['retype_password']
+            if password == retype_password:
+                user = User.objects.create_user(
+                    username=username, password=password,
+                    email=email, is_supplier=True
+                )
+                Supplier.objects.create(user=user, name=name, address=address)
+                return redirect('supplier-list')
+    context = {
+        'form': forms
+    }
+    return render(request, 'store/create_supplier.html', context)
+
+>>>>>>> 1074f0aa0d82a4919a3df8e7085d78470368cdc7
 
 class SupplierListView(ListView):
     model = Supplier
     template_name = 'store/supplier_list.html'
+<<<<<<< HEAD
     context_object_name = 'suppliers'   # plural for a list
 
 
@@ -132,6 +166,41 @@ class BuyerListView(ListView):
     model = Buyer
     template_name = 'store/buyer_list.html'
     context_object_name = 'buyers'   # plural is more accurate
+=======
+    context_object_name = 'supplier'
+
+
+# Buyer views
+@login_required(login_url='login')
+def create_buyer(request):
+    forms = BuyerForm()
+    if request.method == 'POST':
+        forms = BuyerForm(request.POST)
+        if forms.is_valid():
+            name = forms.cleaned_data['name']
+            address = forms.cleaned_data['address']
+            email = forms.cleaned_data['email']
+            username = forms.cleaned_data['username']
+            password = forms.cleaned_data['password']
+            retype_password = forms.cleaned_data['retype_password']
+            if password == retype_password:
+                user = User.objects.create_user(
+                    username=username, password=password,
+                    email=email, is_buyer=True
+                )
+                Buyer.objects.create(user=user, name=name, address=address)
+                return redirect('buyer-list')
+    context = {
+        'form': forms
+    }
+    return render(request, 'store/create_buyer.html', context)
+
+
+class BuyerListView(ListView):
+    model = Buyer
+    template_name = 'store/buyer_list.html'
+    context_object_name = 'buyer'
+>>>>>>> 1074f0aa0d82a4919a3df8e7085d78470368cdc7
 
 
 # Season views
@@ -257,6 +326,7 @@ class DeliveryListView(ListView):
     model = Delivery
     template_name = 'store/delivery_list.html'
     context_object_name = 'delivery'
+<<<<<<< HEAD
  
  
 @login_required
@@ -281,3 +351,6 @@ def update_order_status(request, order_id):
         messages.error(request, "Invalid status value.")
     
     return redirect('dashboard')
+=======
+ 
+>>>>>>> 1074f0aa0d82a4919a3df8e7085d78470368cdc7

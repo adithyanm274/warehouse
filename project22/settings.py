@@ -81,7 +81,11 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'warehouse',
         'USER':'root',
+<<<<<<< HEAD
         'PASSWORD':'root',
+=======
+        'PASSWORD':'',
+>>>>>>> 1074f0aa0d82a4919a3df8e7085d78470368cdc7
         'HOST':'localhost',
         'PORT':'3306',
     }
@@ -122,10 +126,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
+<<<<<<< HEAD
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+=======
+STATIC_URL = 'static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+>>>>>>> 1074f0aa0d82a4919a3df8e7085d78470368cdc7
 
 MEDIA_URL='/media/'
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
@@ -136,5 +146,8 @@ MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'users.User'
+<<<<<<< HEAD
 LOGIN_URL = 'login'                    # uses the named URL 'login' from users.urls
 LOGIN_REDIRECT_URL = 'dashboard'
+=======
+>>>>>>> 1074f0aa0d82a4919a3df8e7085d78470368cdc7
