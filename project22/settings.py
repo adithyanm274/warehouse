@@ -10,8 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+from logging import root
 import os
 from pathlib import Path
+import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,8 +29,7 @@ SECRET_KEY = 'django-insecure-sx44iauq^#ldgn)&rrodd)bo_nfd#x!8g@bkkj53f*9)fr1r0!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['.onrender.com', 'localhost', '127.0.0.1']
 
 # Application definition
 
@@ -44,6 +46,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -81,12 +84,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'warehouse',
         'USER':'root',
-<<<<<<< HEAD
-        'PASSWORD':'root',
-=======
-        'PASSWORD':'',
->>>>>>> 1074f0aa0d82a4919a3df8e7085d78470368cdc7
         'HOST':'localhost',
+        'PASSWORD':'',
         'PORT':'3306',
     }
 }
@@ -126,17 +125,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-<<<<<<< HEAD
 
-STATIC_URL = 'static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-=======
-STATIC_URL = 'static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_URL = '/static/'
+if not DEBUG:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
->>>>>>> 1074f0aa0d82a4919a3df8e7085d78470368cdc7
 
+ 
 MEDIA_URL='/media/'
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 
@@ -146,8 +142,6 @@ MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'users.User'
-<<<<<<< HEAD
 LOGIN_URL = 'login'                    # uses the named URL 'login' from users.urls
 LOGIN_REDIRECT_URL = 'dashboard'
-=======
->>>>>>> 1074f0aa0d82a4919a3df8e7085d78470368cdc7
+
