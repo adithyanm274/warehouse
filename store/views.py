@@ -113,57 +113,7 @@ class SupplierListView(ListView):
 
 
 # Buyer views
-def create_buyer(request):
-    if request.method == 'POST':
-        print("=== POST request received ===")
-        form = BuyerForm(request.POST)
-        if form.is_valid():
-            print("Form is valid")
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            retype_password = form.cleaned_data['retype_password']
-            email = form.cleaned_data['email']
-            
-            if User.objects.filter(username=username).exists():
-                print("Username already exists")
-                form.add_error('username', 'Username already taken.')
-                return render(request, 'store/create_buyer.html', {'form': form})
-            
-            if password != retype_password:
-                print("Password mismatch")
-                form.add_error('retype_password', 'Passwords do not match')
-                return render(request, 'store/create_buyer.html', {'form': form})
-            
-            print("Creating user...")
-            user = User.objects.create_user(username=username, password=password, email=email)
-            print(f"User created: {user.username}, id: {user.id}")
-            
-            # Skip is_buyer for now
-            # user.is_buyer = True
-            # user.save()
-            
-            print("Creating Buyer profile...")
-            Buyer.objects.create(
-                user=user,
-                name=form.cleaned_data['name'],
-                address=form.cleaned_data['address']
-            )
-            print("Buyer created – redirecting now")
-            return redirect('buyer-list')
-        else:
-            print("Form invalid – errors:", form.errors)
-    else:
-        print("GET request")
-        form = BuyerForm()
-    return render(request, 'store/create_buyer.html', {'form': form})
-
-class BuyerListView(ListView):
-    model = Buyer
-    template_name = 'store/buyer_list.html'
-    context_object_name = 'buyers'   
-
-
-# Buyer views
+# Keep this version (with proper password check and is_buyer)
 @login_required(login_url='login')
 def create_buyer(request):
     forms = BuyerForm()
@@ -183,16 +133,15 @@ def create_buyer(request):
                 )
                 Buyer.objects.create(user=user, name=name, address=address)
                 return redirect('buyer-list')
-    context = {
-        'form': forms
-    }
+    context = {'form': forms}
     return render(request, 'store/create_buyer.html', context)
 
 
+# Only ONE BuyerListView – with 'buyers' as context_object_name
 class BuyerListView(ListView):
     model = Buyer
     template_name = 'store/buyer_list.html'
-    context_object_name = 'buyer'
+    context_object_name = 'buyers'   # plural to match template
 
 
 # Season views
