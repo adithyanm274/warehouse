@@ -16,9 +16,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Security & Debug (use environment variables)
 # ------------------------------
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-sx44iauq^#ldgn)&rrodd)bo_nfd#x!8g@bkkj53f*9)fr1r0!')
-DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+# DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+DEBUG = True   # change from False to True
 
-ALLOWED_HOSTS = ['.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['warehouse-01hp.onrender.com', 'localhost', '127.0.0.1']
 
 # For CSRF when using Render's default domain
 CSRF_TRUSTED_ORIGINS = ['https://*.onrender.com']
