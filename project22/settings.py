@@ -73,28 +73,13 @@ WSGI_APPLICATION = 'project22.wsgi.application'
 # Use PostgreSQL on Render, fallback to local MySQL
 # ------------------------------
 DATABASES = {
-    'default': dj_database_url.config(
-        default=(
-            'mysql://root:root@localhost:3306/warehouse'
-            if not DEBUG else
-            'mysql://root:root@localhost:3306/warehouse'
-        ),
-        conn_max_age=600,
-    )
+   'default': dj_database_url.config(
+       # The 'default' value is for local development.
+       default='postgresql://postgres:postgres@localhost:5432/warehouse',
+       conn_max_age=600,
+       ssl_require=True
+   )
 }
-
-# Alternative explicit database settings (uncomment if needed):
-# if os.environ.get('DATABASE_URL'):
-#     DATABASES['default'] = dj_database_url.config(conn_max_age=600)
-# else:
-#     DATABASES['default'] = {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'warehouse',
-#         'USER': 'root',
-#         'PASSWORD': '',
-#         'HOST': 'localhost',
-#         'PORT': '3306',
-#     }
 
 # ------------------------------
 # Password validation
