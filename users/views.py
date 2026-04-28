@@ -1,8 +1,9 @@
 # users/views.py
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, get_user_model
 from .forms import LoginForm, RegisterForm
 
+User = get_user_model()   # <-- THIS WAS MISSING
 
 def login_page(request):
     forms = LoginForm()
@@ -26,6 +27,7 @@ def logout_page(request):
     logout(request)
     return redirect('login')
 
+
 def register_page(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
@@ -38,7 +40,7 @@ def register_page(request):
                 last_name=form.cleaned_data.get('last_name', ''),
             )
             login(request, user)
-            return redirect('login')   # straight to dashboard after signup
+            return redirect('dashboard')   # changed from 'login' to go directly to dashboard
     else:
         form = RegisterForm()
     return render(request, 'users/register.html', {'form': form})
