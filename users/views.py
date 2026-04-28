@@ -1,21 +1,7 @@
 # users/views.py
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout, get_user_model
-from .forms import LoginForm, RegisterForm
-
-User = get_user_model()
-
-def login_page(request):
-    form = LoginForm()
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-
-from .forms import LoginForm
+from .forms import LoginForm, RegisterForm
 
 
 def login_page(request):
@@ -29,7 +15,9 @@ def login_page(request):
             if user:
                 login(request, user)
                 return redirect('dashboard')
-    return render(request, 'users/login.html', {'form': form})
+            else:
+                forms.add_error(None, "Invalid username or password")
+    
     context = {'form': forms}
     return render(request, 'users/login.html', context)
 
