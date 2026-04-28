@@ -79,6 +79,7 @@ def create_supplier(request):
         form = SupplierForm()
     
     return render(request, 'store/create_supplier.html', {'form': form})
+
 @login_required(login_url='login')
 def create_supplier(request):
     forms = SupplierForm()
@@ -155,11 +156,11 @@ def create_buyer(request):
         print("GET request")
         form = BuyerForm()
     return render(request, 'store/create_buyer.html', {'form': form})
+
 class BuyerListView(ListView):
     model = Buyer
     template_name = 'store/buyer_list.html'
-    context_object_name = 'buyers'   # plural is more accurate
-    context_object_name = 'supplier'
+    context_object_name = 'buyers'   
 
 
 # Buyer views
