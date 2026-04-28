@@ -2,9 +2,10 @@ from django.shortcuts import render, redirect,get_object_or_404
 from django.views.generic import ListView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
-from django.core.exceptions import PermissionDenied
-from django.http import HttpResponseNotAllowed
-from django.contrib import messages
+# from django.core.exceptions import PermissionDenied
+# from django.http import HttpResponseNotAllowed
+# from django.contrib import messages
+from django.contrib.admin.views.decorators import staff_member_required
 
 
 from django.shortcuts import render, redirect
@@ -270,25 +271,13 @@ class DeliveryListView(ListView):
  
  
 @login_required
+@staff_member_required   # only staff (admin) can access
 def update_order_status(request, order_id):
-    # Only admin (staff) can change status
-    if not request.user.is_staff:
-        raise PermissionDenied("You are not authorised to change order status.")
-    
-    # Only allow POST requests
-    if request.method != 'POST':
-        return HttpResponseNotAllowed(['POST'])
-    
-    order = get_object_or_404(Order, id=order_id)
-    new_status = request.POST.get('status')
-    valid_statuses = ['pending', 'approved', 'complete', 'decline', 'bulk']
-    
-    if new_status in valid_statuses:
-        order.status = new_status
-        order.save()
-        messages.success(request, f"Order #{order.id} status updated to {new_status}.")
-    else:
-        messages.error(request, "Invalid status value.")
-    
-    return redirect('dashboard')
+    if request.method == 'POST':
+        order = get_object_or_404(Order, id=order_id)
+        new_status = request.POST.get('status')
+        if new_status in dict(Order.STATUS_CHOICES):
+            order.status = new_status
+            order.save()
+    return redirect('dashboard') 
  
