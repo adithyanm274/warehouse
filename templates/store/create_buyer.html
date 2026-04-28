@@ -40,7 +40,6 @@
                 <!-- Credit Card -->
                 <div id="pay-invoice">
                     <div class="card-body">
-<<<<<<< HEAD
                         <!-- Display non-field errors (e.g., password mismatch) -->
                         {% if form.non_field_errors %}
                             <div class="alert alert-danger">
@@ -85,7 +84,6 @@
                                 {% endif %}
                             </div>
 
-=======
                         <form action="#" method="post" novalidate="novalidate">
                             {% csrf_token %}
                             <div class="form-group">
@@ -104,25 +102,20 @@
                                 <label for="username" class="control-label mb-1">Username</label>
                                 {{ form.username }}
                             </div>
->>>>>>> 1074f0aa0d82a4919a3df8e7085d78470368cdc7
                             <div class="row">
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="password" class="control-label mb-1">Password</label>
                                         {{ form.password }}
-<<<<<<< HEAD
                                         {% if form.password.errors %}
                                             <div class="text-danger small">{{ form.password.errors|join:", " }}</div>
                                         {% endif %}
-=======
->>>>>>> 1074f0aa0d82a4919a3df8e7085d78470368cdc7
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="retype_password" class="control-label mb-1">Retype Password</label>
                                         {{ form.retype_password }}
-<<<<<<< HEAD
                                         {% if form.retype_password.errors %}
                                             <div class="text-danger small">{{ form.retype_password.errors|join:", " }}</div>
                                         {% endif %}
@@ -130,11 +123,9 @@
                                 </div>
                             </div>
 
-=======
                                     </div>
                                 </div>
                             </div>
->>>>>>> 1074f0aa0d82a4919a3df8e7085d78470368cdc7
                             <div>
                                 <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
                                     <span id="payment-button-amount">Create Buyer</span>

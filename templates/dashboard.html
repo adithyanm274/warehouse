@@ -2,7 +2,6 @@
 
 {% block title %}Dashboard{% endblock title %}
 
-<<<<<<< HEAD
 {% block breadcrumbs %}
 <div class="breadcrumbs">
     <div class="breadcrumbs-inner">
@@ -166,7 +165,6 @@
                                                     {% else %}badge-info{% endif %}">
                                                     {{ order.status|title }}
                                                 </span>
-=======
 {% block content %}
     <!-- Widgets  -->
     <div class="row">
@@ -297,12 +295,10 @@
                                                 <a class="btn btn-secondary" href="">{{ order.status }}</a>
                                             {% else %}
                                                 <a class="btn btn-info" href="">{{ order.status }}</a>
->>>>>>> 1074f0aa0d82a4919a3df8e7085d78470368cdc7
                                             {% endif %}
                                         </td>
                                     </tr>
                                     {% endfor %}
-<<<<<<< HEAD
                                 {% else %}
                                     <tr>
                                         <td colspan="10" class="text-center">No orders found.</td>
@@ -331,7 +327,6 @@
     });
 </script>
 {% endif %}
-=======
                                     {% else %}
                                         <tr><td>No Order Data</td></tr>
                                     {% endif %}
@@ -346,5 +341,4 @@
         </div>
     </div>
     <!-- /.orders -->
->>>>>>> 1074f0aa0d82a4919a3df8e7085d78470368cdc7
 {% endblock content %}

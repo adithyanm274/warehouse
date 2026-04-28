@@ -15,10 +15,7 @@ from .views import (
     ProductListView,
     OrderListView,
     DeliveryListView,
-<<<<<<< HEAD
     update_order_status,
-=======
->>>>>>> 1074f0aa0d82a4919a3df8e7085d78470368cdc7
 )
 
 urlpatterns = [
@@ -37,9 +34,6 @@ urlpatterns = [
     path('product-list/', ProductListView.as_view(), name='product-list'),
     path('order-list/', OrderListView.as_view(), name='order-list'),
     path('delivery-list/', DeliveryListView.as_view(), name='delivery-list'),
-<<<<<<< HEAD
     path('update-order-status/<int:order_id>/', update_order_status, name='update_order_status'),
 
-=======
->>>>>>> 1074f0aa0d82a4919a3df8e7085d78470368cdc7
 ]

@@ -1,19 +1,15 @@
 from django import forms
-<<<<<<< HEAD
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 
 User = get_user_model()
-=======
 
->>>>>>> 1074f0aa0d82a4919a3df8e7085d78470368cdc7
 
 class LoginForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput(attrs={
         'class': 'form-control',
         'placeholder': 'Username',
     }))
-<<<<<<< HEAD
     password = forms.CharField(widget=forms.PasswordInput(attrs={
         'class': 'form-control',
         'placeholder': 'Password',
@@ -64,10 +60,8 @@ class RegisterForm(forms.Form):
         if password and confirm and password != confirm:
             self.add_error('confirm_password', "Passwords do not match.")
         return cleaned_data
-=======
     password = forms.CharField(widget=forms.TextInput(attrs={
         'class': 'form-control',
         'placeholder': 'Password',
         'type': 'password'
     }))
->>>>>>> 1074f0aa0d82a4919a3df8e7085d78470368cdc7

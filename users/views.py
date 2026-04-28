@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # users/views.py
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout, get_user_model
@@ -13,7 +12,6 @@ def login_page(request):
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
-=======
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 
@@ -27,23 +25,18 @@ def login_page(request):
         if forms.is_valid():
             username = forms.cleaned_data['username']
             password = forms.cleaned_data['password']
->>>>>>> 1074f0aa0d82a4919a3df8e7085d78470368cdc7
             user = authenticate(username=username, password=password)
             if user:
                 login(request, user)
                 return redirect('dashboard')
-<<<<<<< HEAD
     return render(request, 'users/login.html', {'form': form})
-=======
     context = {'form': forms}
     return render(request, 'users/login.html', context)
 
->>>>>>> 1074f0aa0d82a4919a3df8e7085d78470368cdc7
 
 def logout_page(request):
     logout(request)
     return redirect('login')
-<<<<<<< HEAD
 
 def register_page(request):
     if request.method == 'POST':
@@ -61,5 +54,3 @@ def register_page(request):
     else:
         form = RegisterForm()
     return render(request, 'users/register.html', {'form': form})
-=======
->>>>>>> 1074f0aa0d82a4919a3df8e7085d78470368cdc7
